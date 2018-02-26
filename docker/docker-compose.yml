@@ -1,0 +1,43 @@
+version: '2'
+services:
+  data:
+    image: busybox
+    volumes:
+      - ./misc/data:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/my.cnf
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: '13187900'
+      MYSQL_DATABASE: 'engine'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: '123456'
+    ports:
+      - "13306:3306"
+    volumes_from:
+      - data
+    container_name: mysql
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ../:/var/www/html
+    links:
+      - web
+    container_name: nginx
+
+  web:
+    build: ./php-fpm71
+    volumes:
+      - ../:/var/www/html
+    links:
+      - mysql
+    environment:
+      DATABASE_HOST: 'mysql'
+      DATABASE_NAME: 'engine'
+      DATABASE_USER: 'user'
+      DATABASE_PASSWORD: '123456'
+    container_name: web
