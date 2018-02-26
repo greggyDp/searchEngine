@@ -2,7 +2,6 @@
 
 namespace App\Component;
 
-
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpKernel\Log\Logger;
 

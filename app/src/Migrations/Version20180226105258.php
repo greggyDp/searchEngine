@@ -15,7 +15,7 @@ class Version20180226105258 extends AbstractMigration
             CREATE TABLE `users_about` (
               `id` bigint(20) UNSIGNED NOT NULL,
               `user` int(10) UNSIGNED NOT NULL,
-              `item` enum('country','firstname','state') COLLATE utf8_unicode_ci NOT NULL,
+              `item` enum('country','firstname','state', 'gavatar') COLLATE utf8_unicode_ci NOT NULL,
               `value` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
               `up_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
