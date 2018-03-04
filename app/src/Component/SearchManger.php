@@ -3,6 +3,7 @@
 namespace App\Component;
 
 use App\Component\Helpers\DataParsing\JsonFiltersParser;
+use App\Entity\Dynamic\SearchResultsCollection;
 use App\Entity\Users;
 use App\Exception\Filters\NoFiltersDetectedException;
 use Doctrine\ORM\EntityManager;
@@ -36,16 +37,16 @@ class SearchManger
      * @param string $filters
      * @return mixed
      */
-    public function search(string $filters): array
+    public function search(string $filters): SearchResultsCollection
     {
-        $result = [];
         try {
             $queryString = $this->filtersParser->createQueryStringFromJsonFilters($filters);
-            $result = $this->em->getRepository(Users::class)->searchByFilters($queryString);
+            $searchResultCollection = $this->em->getRepository(Users::class)->searchByFilters($queryString);
         } catch (NoFiltersDetectedException $e) {
             $this->logger->error($e->getMessage());
+            exit(1);
         }
 
-        return $result;
+        return $searchResultCollection;
     }
 }

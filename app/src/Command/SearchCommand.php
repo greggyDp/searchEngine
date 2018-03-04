@@ -56,9 +56,9 @@ class SearchCommand extends ContainerAwareCommand
             ]
         ]);
 
-        $result = $this->getContainer()->get('app.search_manager')->search($a);
+        $resultCollection = $this->getContainer()->get('app.search_manager')->search($a);
         $output->writeln(
-            json_encode($result)
+            json_encode($resultCollection->getSearchResultsArray())
         );
     }
 }

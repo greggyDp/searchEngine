@@ -22,8 +22,14 @@ class SearchResultsCollection
     /**
      * @return SearchResult[]
      */
-    public function getSearchResults(): array
+    public function getSearchResultsArray(): array
     {
-        return $this->searchResults;
+        $result = [];
+
+        foreach ($this->searchResults as $searchResult) {
+            $result[] = $searchResult->jsonSerialize();
+        }
+
+        return $result;
     }
 }
