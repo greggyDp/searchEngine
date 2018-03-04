@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  *          @ORM\Index(name="role_reg_date", columns={"role", "reg_date"})
  *     }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  */
 class Users
 {
@@ -65,6 +66,13 @@ class Users
      * @ORM\Column(name="last_visit", type="datetime", nullable=false, options={"default"="0000-00-00 00:00:00"})
      */
     private $lastVisit = '0000-00-00 00:00:00';
+
+    /**
+     * @var ArrayCollection|UsersAbout[]
+     *
+     * @ORM\OneToMany(targetEntity="UsersAbout", mappedBy="user")
+     */
+    private $usersAbout;
 
     /**
      * Users constructor.

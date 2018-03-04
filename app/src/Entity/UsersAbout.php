@@ -64,7 +64,7 @@ class UsersAbout
     /**
      * @var Users
      *
-     * @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\ManyToOne(targetEntity="Users", inversedBy="usersAbout")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user", referencedColumnName="id")
      * })

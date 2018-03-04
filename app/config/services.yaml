@@ -32,4 +32,8 @@ services:
         public: true
         arguments:
             $em: '@doctrine.orm.entity_manager'
+            $filtersParser: '@app.json_filters_parer'
             $logger: '@logger'
+
+    app.json_filters_parer:
+        class: App\Component\Helpers\DataParsing\JsonFiltersParser
