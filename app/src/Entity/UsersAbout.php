@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="users_about",
  *     indexes={
- *          @ORM\Index(name="user", columns={"user"}),
- *          @ORM\Index(name="user_item_value", columns={"user", "item", "value"}),
+ *          @ORM\Index(name="user", columns={"user_id"}),
+ *          @ORM\Index(name="user_item_value", columns={"user_id", "item", "value"}),
  *          @ORM\Index(name="item", columns={"item"})
  *     }
  * )
@@ -65,9 +65,6 @@ class UsersAbout
      * @var Users
      *
      * @ORM\ManyToOne(targetEntity="Users", inversedBy="usersAbout")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user", referencedColumnName="id")
-     * })
      */
     private $user;
 

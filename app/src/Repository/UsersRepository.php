@@ -2,20 +2,20 @@
 
 namespace App\Repository;
 
-use App\Entity\Dynamic\SearchResultsCollection;
 use Doctrine\ORM\EntityRepository;
 
 class UsersRepository extends EntityRepository
 {
-    public function searchByFilters(string $queryString): SearchResultsCollection
+    public function searchByFilters(string $queryString): array
     {
         $records = $this->createQueryBuilder('u')
+            ->select('u')
+            ->distinct()
             ->join('u.usersAbout', 'ua')
             ->where($queryString)
             ->getQuery()
-            ->getResult()
+            ->getArrayResult();
         ;
-
-        var_dump($records);die;
+        return $records;
     }
 }

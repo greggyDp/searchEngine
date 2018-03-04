@@ -68,7 +68,7 @@ class Users
     private $lastVisit = '0000-00-00 00:00:00';
 
     /**
-     * @var ArrayCollection|UsersAbout[]
+     * @var ArrayCollection | UsersAbout[]
      *
      * @ORM\OneToMany(targetEntity="UsersAbout", mappedBy="user")
      */

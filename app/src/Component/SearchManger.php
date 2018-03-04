@@ -38,14 +38,14 @@ class SearchManger
      */
     public function search(string $filters): array
     {
+        $result = [];
         try {
             $queryString = $this->filtersParser->createQueryStringFromJsonFilters($filters);
-            $searchResultsCollection = $this->em->getRepository(Users::class)->searchByFilters($queryString);
-            $result = $searchResultsCollection->getSearchResults();
+            $result = $this->em->getRepository(Users::class)->searchByFilters($queryString);
         } catch (NoFiltersDetectedException $e) {
             $this->logger->error($e->getMessage());
         }
 
-        var_dump($result);die;
+        return $result;
     }
 }

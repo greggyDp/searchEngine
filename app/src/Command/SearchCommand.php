@@ -32,7 +32,8 @@ class SearchCommand extends ContainerAwareCommand
         $a = json_encode([
             'or' => [
                 ['u.id', '=', '1000'],
-                ['ua.country', '!=', "'Russia'"],
+                ['ua.item', '=', "'Country'"],
+                ['ua.value', '!=', "'Russia'"],
             ]
         ]);
 
@@ -55,6 +56,9 @@ class SearchCommand extends ContainerAwareCommand
             ]
         ]);
 
-        $this->getContainer()->get('app.search_manager')->search($a);
+        $result = $this->getContainer()->get('app.search_manager')->search($a);
+        $output->writeln(
+            json_encode($result)
+        );
     }
 }
